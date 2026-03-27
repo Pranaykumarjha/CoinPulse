@@ -29,7 +29,7 @@ export async function fetcher<T>(
   console.log('Fetching URL:', url);
   const response = await fetch(url, {
     headers: {
-      'x-cg-demo-api-key': API_KEY,
+      'x-cg-pro-api-key': API_KEY,
       'Content-type': 'application/json',
     } as Record<string, string>,
     next: { revalidate },
