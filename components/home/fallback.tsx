@@ -80,3 +80,66 @@ export function TrendingCoinsFallback() {
   );
 }
 
+const skeletonCategories: Category[] = Array.from({ length: 6 }, (_, i) => ({
+  name: '—',
+  top_3_coins: ['/converter.svg', '/converter.svg', '/converter.svg'],
+  market_cap_change_24h: 0,
+  market_cap: 0,
+  volume_24h: 0,
+}));
+
+const categoriesFallbackColumns: DataTableColumn<Category>[] = [
+  {
+    header: 'Category',
+    cellClassName: 'category-cell',
+    cell: () => <div className="category-skeleton skeleton animate-pulse" />,
+  },
+  {
+    header: 'Top Gainers',
+    cellClassName: 'top-gainers-cell',
+    cell: () => (
+      <div className="flex gap-2">
+        <div className="coin-skeleton skeleton animate-pulse" />
+        <div className="coin-skeleton skeleton animate-pulse" />
+        <div className="coin-skeleton skeleton animate-pulse" />
+      </div>
+    ),
+  },
+  {
+    header: '24h Change',
+    cellClassName: 'change-header-cell',
+    cell: () => (
+      <div className="change-cell">
+        <div className="price-change">
+          <div className="change-icon skeleton animate-pulse" />
+          <div className="change-line skeleton animate-pulse" />
+        </div>
+      </div>
+    ),
+  },
+  {
+    header: 'Market Cap',
+    cellClassName: 'market-cap-cell',
+    cell: () => <div className="value-skeleton-md skeleton animate-pulse" />,
+  },
+  {
+    header: '24h Change',
+    cellClassName: 'volume-cell',
+    cell: () => <div className="value-skeleton-md skeleton animate-pulse" />,
+  },
+];
+
+export function CategoriesFallback() {
+  return (
+    <div id="categories-fallback">
+      <h4>Top Categories</h4>
+      <DataTable
+        data={skeletonCategories}
+        columns={categoriesFallbackColumns}
+        rowKey={(_, index) => `category-skeleton-${index}`}
+        tableClassName="mt-3"
+      />
+    </div>
+  );
+}
+
